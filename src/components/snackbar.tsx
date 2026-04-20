@@ -7,12 +7,16 @@ import {useRouter} from "next/navigation";
 import AddToCart from "@/components/add-to-cart";
 import {SnackProps} from "@/lib/aux/types";
 import {THEME_COLORS} from "@/lib/aux/styles";
+import { useCourseContext } from '@/lib/aux/course-context'
 
-export default function SnackbarElem({message, isButton, redirectTarget, contained, fullWidth}:SnackProps) {
+export default function SnackbarElem({message, isButton, redirectTarget, contained, fullWidth, course}:SnackProps) {
     const [open, setOpen] = React.useState(false);
+    const { addToCart, addToWishlist } = useCourseContext();
 
     const handleClick = (e:React.MouseEvent) => {
-        e.stopPropagation()
+        e.stopPropagation();
+        if (redirectTarget === "Cart") addToCart(course);
+        if (redirectTarget === "Wishlist") addToWishlist(course);
         setOpen(true);
     }
 

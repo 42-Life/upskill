@@ -12,6 +12,7 @@ import {
 import {THEME_COLORS} from "@/lib/aux/styles";
 import * as React from "react";
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 // import Link from "next/link";
 
 type signupProps = {
@@ -23,6 +24,7 @@ type signupProps = {
 
 export default  function Signup({props}:signupProps) {
     const [openDialog, setOpenDialog] = useState(false);
+    const router = useRouter();
 
     const handleOpenDialog = () => {
         setOpenDialog(true);
@@ -30,6 +32,12 @@ export default  function Signup({props}:signupProps) {
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
+    }
+
+    const submitForm = (e:React.SubmitEvent) => {
+        e.preventDefault();
+        setOpenDialog(false);
+        router.push("/my-courses");
     }
 
     return (
@@ -59,13 +67,13 @@ export default  function Signup({props}:signupProps) {
                 <DialogContent>
                     <DialogContentText>{props.signInReason}</DialogContentText>
 
-                    <form id="sign-up">
+                    <form id="sign-up" onSubmit={submitForm}>
                         <Box sx={{ display: "flex", flexDirection: "column", my:"3%", width: "100%"}}>
                             <TextField sx={{my: "3%"}} autoFocus required id={"fname"} name={"fname"} label={"First Name"} type={"text"}></TextField>
-                            <TextField sx={{my: "3%"}} autoFocus required id={"surname"} name={"surname"} label={"Surname"} type={"text"}></TextField>
-                            <TextField sx={{my: "3%"}} autoFocus required id={"email"} name={"email"} label={"Email Address"} type={"email"}></TextField>
-                            <TextField sx={{my: "3%"}} autoFocus required id={"password"} name={"password"} label={"Password"} type={"password"}></TextField>
-                            <TextField sx={{my: "3%"}} autoFocus required id={"confirm"} name={"confirm"} label={"Confirm Password"} type={"password"}></TextField>
+                            <TextField sx={{my: "3%"}} required id={"surname"} name={"surname"} label={"Surname"} type={"text"}></TextField>
+                            <TextField sx={{my: "3%"}} required id={"email"} name={"email"} label={"Email Address"} type={"email"}></TextField>
+                            <TextField sx={{my: "3%"}} required id={"password"} name={"password"} label={"Password"} type={"password"}></TextField>
+                            <TextField sx={{my: "3%"}} required id={"confirm"} name={"confirm"} label={"Confirm Password"} type={"password"}></TextField>
                         </Box>
                     </form>
                 </DialogContent>

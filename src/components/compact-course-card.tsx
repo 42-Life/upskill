@@ -12,16 +12,23 @@ import {useRouter} from "next/navigation";
 import {useState} from "react";
 import SnackbarElem from "@/components/snackbar";
 import FilterChips from "@/components/filter-chips";
+import {useCourseContext} from "@/lib/aux/course-context";
 
 export default function CompactCourseCard({props}:CompactCardProps) {
     const router = useRouter();
-    const [inWishlist, setInWishlist] = useState(props.variant === "wishlist");
+    // const [inWishlist, setInWishlist] = useState(props.variant === "wishlist");
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useCourseContext();
+
 
     const handleSeeMore = () => router.push(`/course/${props.course.id}`);
 
     const toggleWishlist = (e: React.MouseEvent) => {
         e.stopPropagation();
-        setInWishlist((prev) => !prev);
+        if (isInWishlist(props.course.id)) {
+            removeFromWishlist(props.course.id);
+        } else {
+            addToWishlist(props.course);
+        }
     };
 
     const handleRemove = (e: React.MouseEvent) => {
@@ -97,7 +104,7 @@ export default function CompactCourseCard({props}:CompactCardProps) {
                                 </IconButton>
                             :
                                 <IconButton size="small" onClick={toggleWishlist} sx={{ p: 0.5 }}>
-                                    {inWishlist
+                                    {isInWishlist(props.course.id)
                                         ? <FavoriteIcon fontSize="small" htmlColor="#FF0000" />
                                         : <FavoriteBorderIcon fontSize="small" />}
                                 </IconButton>
@@ -118,7 +125,7 @@ export default function CompactCourseCard({props}:CompactCardProps) {
                         </Box>
                         {/* Add to cart button — wishlist variant only */}
                         {props.variant === "wishlist" && (
-                            <SnackbarElem message={"Add to Cart"} isButton={false} redirectTarget={"Wishlist"} contained={false} fullWidth={false}/>
+                            <SnackbarElem message={"Add to Cart"} isButton={false} redirectTarget={"Wishlist"} contained={false} fullWidth={false} course={props.course} />
                             // <Typography
                             //     onClick={handleAddToCart}
                             //     sx={{

@@ -11,7 +11,7 @@ export default function SectionTitle(props: TypographyProps) {
             fontWeight: 600,
             color: THEME_COLORS.primary,
             // fontWeight: 500,
-            textAlign: "left",
+            textAlign: "center",
 
             ...props.sx
         }}

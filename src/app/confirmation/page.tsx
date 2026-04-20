@@ -4,7 +4,7 @@ import {Box} from "@mui/material";
 
 export default function ConfirmationPage() {
     return(
-        <Box sx={{mt: {md: "15%", sm: "25%", xs: "35%"}, mx: "10%"}}>
+        <Box sx={{mt: {md: "15%", sm: "25%", xs: "35%"}, mx: "10%", mb: "20%"}}>
             <SectionTitle>Your payment has been confirmed.</SectionTitle>
             <SubtitleDark>Thank you for shopping with UpSkill. Click your profile to view your courses. Happy learning!</SubtitleDark>
         </Box>

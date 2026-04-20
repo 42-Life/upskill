@@ -5,6 +5,7 @@ import Nav from "@/components/nav";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import ThemeProv from "@/lib/aux/ThemeProv";
 import Footer from "@/components/footer";
+import {CourseContextProvider} from "@/lib/aux/course-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,13 +32,17 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased `}
     >
       <body className="min-h-full flex flex-col">
-        <AppRouterCacheProvider>
-          <ThemeProv>
-            <Nav/>
-            {children}
-            <Footer/>
-          </ThemeProv>
-        </AppRouterCacheProvider>
+        <CourseContextProvider>
+          <AppRouterCacheProvider>
+            <ThemeProv>
+              <Nav/>
+              <main style={{minHeight: "100vh"}}>
+                {children}
+              </main>
+              <Footer/>
+            </ThemeProv>
+          </AppRouterCacheProvider>
+        </CourseContextProvider>
       </body>
     </html>
   );

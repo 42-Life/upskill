@@ -124,8 +124,8 @@ export default async function CoursePage({params}: PageProps) {
                 {/*    fontWeight:"bold", mb:1, lineHeight: 1, color: THEME_COLORS.white, mt: 5, fontSize: '2rem',*/}
                 {/*}}>R{courseData.price}*/}
                 {/*</Typography>*/}
-                <SnackbarElem message={"Add Course to Wishlist"} isButton={true} redirectTarget={"Wishlist"} contained={false} fullWidth={true}/>
-                <SnackbarElem message={"Add Course to Cart"} isButton={true} redirectTarget={"Cart"} contained={true} fullWidth={true}/>
+                <SnackbarElem message={"Add Course to Wishlist"} isButton={true} redirectTarget={"Wishlist"} contained={false} fullWidth={true} course={courseData}/>
+                <SnackbarElem message={"Add Course to Cart"} isButton={true} redirectTarget={"Cart"} contained={true} fullWidth={true} course={courseData}/>
             </Box>
 
         </Card>

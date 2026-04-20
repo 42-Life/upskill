@@ -9,7 +9,7 @@ export default function SectionTitleLight(props: TypographyProps) {
             mb: '4vh',
             fontFamily: 'var(--font-moralana)',
             fontWeight: 600,
-            color: THEME_COLORS.darkShade,
+            color: THEME_COLORS.background,
             // fontWeight: 500,
             textAlign: "center",
 

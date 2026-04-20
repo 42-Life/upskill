@@ -44,6 +44,7 @@ export type SnackProps = {
     redirectTarget: string, // go to checkout, wishlist, or cart
     contained: boolean,
     fullWidth: boolean,
+    course: Course,
 }
 
 export type CompactCardProps = {
@@ -53,4 +54,17 @@ export type CompactCardProps = {
         onAddToCart?: (id: string) => void;
         onRemove?: (id: string) => void;
     }
+}
+
+export type CourseContextType = {
+    cart: Course[];
+    wishlist: Course[];
+    myCourses: Course[];
+    addToCart: (course: Course) => void;
+    removeFromCart: (id: string) => void;
+    addToWishlist: (course: Course) => void;
+    removeFromWishlist: (id: string) => void;
+    isInCart: (id: string) => boolean;
+    isInWishlist: (id: string) => boolean;
+    completePurchase: () => void;
 }

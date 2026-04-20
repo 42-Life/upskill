@@ -27,6 +27,7 @@ import { useState } from "react";
 // custom theme
 import {THEME_COLORS} from "@/lib/aux/styles";
 import SnackbarElem from "@/components/snackbar";
+import {useCourseContext} from "@/lib/aux/course-context";
 
 type CourseCardProps = {
     id: string,
@@ -38,11 +39,16 @@ type CourseCardProps = {
     hours_total: number,
     skills: string[],
     description: string,
+    tagline: string,
+    bullets: string[][],
+    category: string[],
 }
 
 export default function CourseCard(props: CourseCardProps) {
+    // hooks
     const router = useRouter();
-    const [inWishlist, setInWishlist] = useState(false);
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useCourseContext();
+    // const [inWishlist, setInWishlist] = useState(false);
 
     // const handlePurchase = (e: React.MouseEvent) => {
     //     e.stopPropagation();    // stops handleSeeMore from overriding this button
@@ -54,9 +60,13 @@ export default function CourseCard(props: CourseCardProps) {
     }
 
     const toggleWishlist = (e: React.MouseEvent) => {
-        e.stopPropagation();    // stops handleSeeMore from overriding this button
-        setInWishlist(!inWishlist);
-    }
+        e.stopPropagation();
+        if (isInWishlist(props.id)) {
+            removeFromWishlist(props.id);
+        } else {
+            addToWishlist(props);
+        }
+    };
 
     return (
         <Card
@@ -81,7 +91,7 @@ export default function CourseCard(props: CourseCardProps) {
                     <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>{props.title}</Typography>
                     <IconButton
                         onClick={toggleWishlist}
-                    >{inWishlist ? <FavoriteIcon htmlColor={"#FF0000"}/> : <FavoriteBorderIcon/>}
+                    >{isInWishlist(props.id) ? <FavoriteIcon htmlColor={"#FF0000"}/> : <FavoriteBorderIcon/>}
                     </IconButton>
                 </Box>
 
@@ -132,7 +142,7 @@ export default function CourseCard(props: CourseCardProps) {
                 <Box sx={{ p:2, display:"flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography variant="h6" sx={{ fontWeight:"bold", mb:1, lineHeight: 1 }}>R{props.price}</Typography>
                 </Box>
-                <SnackbarElem message={"Add Course to Cart"} isButton={true} redirectTarget={"Cart"} contained={true} fullWidth={false}/>
+                <SnackbarElem message={"Add Course to Cart"} isButton={true} redirectTarget={"Cart"} contained={true} fullWidth={false} course={props}/>
                 {/*<Button*/}
                 {/*    variant="contained" fullWidth*/}
                 {/*    onClick={handlePurchase}*/}

@@ -7,9 +7,18 @@ import {cartCourses} from "@/lib/data/courses";
 import SubtitleDark from "@/components/subtitle-dark";
 import PaymentSummary from "@/components/payment-summary";
 import {useState} from "react";
+import {useCourseContext} from "@/lib/aux/course-context";
+import {useRouter} from "next/navigation";
 
 export default function Checkout() {
     const [formSubmitted, setFormSubmitted] = useState(true);
+    const { cart, completePurchase } = useCourseContext();
+    const router = useRouter();
+
+    const handleCompletePurchase = () => {
+        completePurchase();             // clears cart, moves to myCourses
+        router.push("/my-courses");     // redirect after purchase
+    };
 
     return(
         <>
@@ -23,7 +32,7 @@ export default function Checkout() {
 
                     <Grid size={{ xs: 12, md: 5.5}} >
                         <SubtitleDark>Order Summary</SubtitleDark>
-                        <OrderSummary props={{cart:cartCourses, isCheckout:true, canPay:formSubmitted}} />
+                        <OrderSummary props={{cart:cartCourses, isCheckout:true, canPay:formSubmitted, onCompletePurchase:handleCompletePurchase}} />
                     </Grid>
                 </Grid>
             </Box>

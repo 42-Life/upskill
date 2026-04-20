@@ -10,6 +10,7 @@ type OrderSummaryProps = {
         cart: Course[];
         isCheckout: boolean;
         canPay?: boolean;
+        onCompletePurchase?: () => void;
     }
 }
 
@@ -66,7 +67,7 @@ export default function OrderSummary({props}: OrderSummaryProps) {
 
                 {
                     props.isCheckout ?
-                        <Button variant={"contained"} fullWidth onClick={handlePayment} sx={{
+                        <Button variant={"contained"} fullWidth onClick={props.onCompletePurchase} disabled={!props.canPay} sx={{
                             borderRadius: 4, fontWeight: "bold", fontSize: "1.2rem", textTransform: "none", p: 2, mt: "4%",
                             color: 'primary',
                         }}>
