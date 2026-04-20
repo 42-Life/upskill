@@ -10,18 +10,7 @@ export default function CourseGrid({courses}:CourseGridProps) {
         <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
             {
                 courses.map((course) => (
-                    <CourseCard
-                        id={course.id}
-                        key={course.title}
-                        title={course.title}
-                        price={course.price}
-                        image={course.image}
-                        rating={course.rating}
-                        reviewCount={course.reviewCount}
-                        hours_total={course.hours_total}
-                        skills={course.skills}
-                        description={course.description}
-                    />
+                    <CourseCard key={course.id} {...course} />
                 ))
             }
         </Grid>

@@ -9,7 +9,6 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import {THEME_COLORS} from "@/lib/aux/styles";
 import {useRouter} from "next/navigation";
-import {useState} from "react";
 import SnackbarElem from "@/components/snackbar";
 import FilterChips from "@/components/filter-chips";
 import {useCourseContext} from "@/lib/aux/course-context";
