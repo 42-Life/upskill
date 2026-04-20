@@ -50,7 +50,7 @@ export type SnackProps = {
 export type CompactCardProps = {
     props: {
         course: Course,
-        variant: "cart" | "wishlist"
+        variant: "cart" | "wishlist" | "my-courses",
         onAddToCart?: (id: string) => void;
         onRemove?: (id: string) => void;
     }

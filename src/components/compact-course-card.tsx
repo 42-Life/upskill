@@ -6,20 +6,29 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ClearIcon from '@mui/icons-material/Clear';
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import GetAppIcon from '@mui/icons-material/GetApp';
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 import {THEME_COLORS} from "@/lib/aux/styles";
 import {useRouter} from "next/navigation";
 import SnackbarElem from "@/components/snackbar";
 import FilterChips from "@/components/filter-chips";
 import {useCourseContext} from "@/lib/aux/course-context";
+import {useState} from "react";
 
 export default function CompactCourseCard({props}:CompactCardProps) {
     const router = useRouter();
     // const [inWishlist, setInWishlist] = useState(props.variant === "wishlist");
     const { addToWishlist, removeFromWishlist, isInWishlist } = useCourseContext();
 
-
     const handleSeeMore = () => router.push(`/course/${props.course.id}`);
+
+    const [isDownloaded, setIsDownloaded] = useState(false);
+
+    const toggleDownloadState = (e:React.MouseEvent) => {
+        e.stopPropagation();
+        setIsDownloaded(prev => !prev);
+    }
 
     const toggleWishlist = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -102,11 +111,21 @@ export default function CompactCourseCard({props}:CompactCardProps) {
                                     <ClearIcon fontSize="small" />
                                 </IconButton>
                             :
-                                <IconButton size="small" onClick={toggleWishlist} sx={{ p: 0.5 }}>
-                                    {isInWishlist(props.course.id)
-                                        ? <FavoriteIcon fontSize="small" htmlColor="#FF0000" />
-                                        : <FavoriteBorderIcon fontSize="small" />}
-                                </IconButton>
+                                props.variant === "wishlist" ?
+                                    <IconButton size="small" onClick={toggleWishlist} sx={{ p: 0.5 }}>
+                                        {isInWishlist(props.course.id)
+                                            ? <FavoriteIcon fontSize="small" htmlColor="#FF0000" />
+                                            : <FavoriteBorderIcon fontSize="small" />}
+                                    </IconButton>
+                                :
+                                    <IconButton size="small" onClick={toggleDownloadState} sx={{ p: 0.5 }}>
+                                        {
+                                            !isDownloaded ?
+                                                <GetAppIcon fontSize="small" />
+                                            :
+                                                <DownloadForOfflineIcon fontSize="small" htmlColor="green" />
+                                        }
+                                    </IconButton>
                         }
                     </Box>
                 </Box>

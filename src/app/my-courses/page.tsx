@@ -22,7 +22,7 @@ export default function MyCourses() {
                 myCourses.map((course:Course) => (
                     <CompactCourseCard
                         key={course.id}
-                        props={{ course, variant: "wishlist" }}
+                        props={{ course, variant: "my-courses" }}
                     />
                 ))
             }

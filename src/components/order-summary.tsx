@@ -1,9 +1,7 @@
 "use client"
 
 import { Box, Card, CardContent, Divider, Typography, Button } from "@mui/material";
-import { Course } from "@/lib/aux/types";
 import {THEME_COLORS} from "@/lib/aux/styles";
-import {useRouter} from "next/navigation";
 import {useCourseContext} from "@/lib/aux/course-context";
 
 type OrderSummaryProps = {
