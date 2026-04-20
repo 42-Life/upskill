@@ -4,10 +4,10 @@ import { Box, Card, CardContent, Divider, Typography, Button } from "@mui/materi
 import { Course } from "@/lib/aux/types";
 import {THEME_COLORS} from "@/lib/aux/styles";
 import {useRouter} from "next/navigation";
+import {useCourseContext} from "@/lib/aux/course-context";
 
 type OrderSummaryProps = {
     props: {
-        cart: Course[];
         isCheckout: boolean;
         canPay?: boolean;
         onCompletePurchase?: () => void;
@@ -15,24 +15,24 @@ type OrderSummaryProps = {
 }
 
 export default function OrderSummary({props}: OrderSummaryProps) {
-    const subtotal = props.cart.reduce((sum, course) => sum + course.price, 0);
+    const { cart } = useCourseContext();
+    const subtotal = cart.reduce((sum, course) => sum + course.price, 0);
     const total = subtotal;
-    const router = useRouter();
 
-    const handlePayment = () => {
-        if (props.canPay===true) {
-            router.push("/confirmation")
-        } else {
-            router.push("/checkout");
-        }
-    }
-    // somewhat rudimentary validation, but can suffice for now
+    // const handlePayment = () => {
+    //     if (props.canPay===true) {
+    //         router.push("/confirmation")
+    //     } else {
+    //         router.push("/checkout");
+    //     }
+    // }
+    // somewhat rudimentary validation, but can suffice for now -> updated to better
 
     return(
         <Card variant={"outlined"} sx={{ borderRadius: 3, borderColor: THEME_COLORS.primary, width:"100%"}}>
             <CardContent>
                 {
-                    props.cart.map((course) => (
+                    cart.map((course) => (
                         <Box key={course.id} sx={{
                             display: "flex", justifyContent: "space-between", mb: 0.75
                         }}>
