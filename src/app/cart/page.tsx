@@ -1,6 +1,6 @@
 "use client"
 
-import {Box, Button, Grid,} from '@mui/material';
+import {Box, Button, Grid, Typography,} from '@mui/material';
 import CompactCourseCard from "@/components/compact-course-card";
 // import {cartCourses} from "@/lib/data/courses";
 import SectionTitle from "@/components/styled-text-dark";
@@ -34,9 +34,14 @@ export default function Cart() {
                 <Grid size={{xs: 12, md: 7}}>
                     <SectionTitle>Selected Courses</SectionTitle>
                     {
-                        cart.map((course:Course) => (
-                            <CompactCourseCard key={course.id} props={{course: course, variant: "cart", onRemove: removeFromCart}} />
-                        ))
+                        cart.length === 0 ?
+                            <Typography sx={{ mt: 4, color: THEME_COLORS.primary }}>
+                                You have not added any courses to your wishlist.
+                            </Typography>
+                            :
+                            cart.map((course:Course) => (
+                                <CompactCourseCard key={course.id} props={{course: course, variant: "cart", onRemove: removeFromCart}} />
+                            ))
                     }
                 </Grid>
                 <Grid size={{xs: 12, md: 5}}>
