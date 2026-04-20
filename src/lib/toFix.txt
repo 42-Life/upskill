@@ -1,0 +1,10 @@
+No error message, yet Moralana font not applied to title text
+In course-card file, need to add functionality to add course to cart when selecting checkout. No functionality for multi-course checkout presently
+may be fine w/o multi-course checkout? if so, need to integrate props.id back into course-card code
+Turn COURSES into a dropdown menu, with different subcategories. Use CourseGrid component + subsection constants in courses.ts to produce filtered grid
+Revisit courses.ts; change wishlistCourses and myCourses functionality so these groups are not statically defined, but dynamic as users click heart button and add to cart
+Add snackbar confirmations for purchase, add to cart pop-ups
+Add snackbar effect to 'Add to Cart' button in Wishlist. Ensure to style differently than other snackbar button instantiations
+In About, add bullet points to list Items, and add emboldening to key phrases
+Form confirmation giving some issues; brainstorm solutions
+Limitation, MUI cannot properly format MM/YY date type for TextField component in Payment-summary component. Tried documentation but not working
