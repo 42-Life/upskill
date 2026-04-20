@@ -41,7 +41,7 @@ export default function Cart() {
                 </Grid>
                 <Grid size={{xs: 12, md: 5}}>
                     <SectionTitle>Order Summary</SectionTitle>
-                    <OrderSummary props={{cart:cart, isCheckout:false}} />
+                    <OrderSummary props={{isCheckout:false}} />
                     <Box>
                         <Button variant="contained" fullWidth onClick={handleCheckout}
                             sx={{ my:"2.5%", borderRadius: '10px', backgroundColor: THEME_COLORS.action, '&:hover': {backgroundColor: THEME_COLORS.lightAction}

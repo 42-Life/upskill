@@ -32,7 +32,7 @@ export default function Checkout() {
 
                     <Grid size={{ xs: 12, md: 5.5}} >
                         <SubtitleDark>Order Summary</SubtitleDark>
-                        <OrderSummary props={{cart:cartCourses, isCheckout:true, canPay:formSubmitted, onCompletePurchase:handleCompletePurchase}} />
+                        <OrderSummary props={{isCheckout:true, canPay:formSubmitted, onCompletePurchase:handleCompletePurchase}} />
                     </Grid>
                 </Grid>
             </Box>
